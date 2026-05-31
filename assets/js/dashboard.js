@@ -24,4 +24,6 @@ getFileData.addEventListener("click", async () => {
   } catch (err) {
     alert(err);
   }
+  const data = JSON.parse(localStorage.getItem("uploaded_sales"));
+  console.log("test data: " + data);
 });
