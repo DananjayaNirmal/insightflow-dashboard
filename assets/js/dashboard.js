@@ -1,9 +1,10 @@
-import { readUploadedFile } from "./assets/modules/fileReader.js";
+import { readUploadedFile } from "../modules/fileRead.js";
 
 const getFileData = document.getElementById("analyze-data");
 const readFile = document.getElementById("fileInput");
 
 getFileData.addEventListener("click", () => {
+  console.log("Start the function");
   readFile.addEventListener("change", async (e) => {
     const file = e.target.files[0];
 
