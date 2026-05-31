@@ -15,6 +15,8 @@
       crossorigin="anonymous"
     ></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
     <title>Document</title>
   </head>
   <body>
@@ -39,10 +41,13 @@
       <div class="m-5">
         <h5 class="mb-5">Choose or Drag and drop your sales report here📈</h5>
         <div class="border border-2 border-dashed rounded p-5">
-          <input class="form-control" type="file" />
-          <p class="mb-4 text-secondary">csv/ excel</p>
+          <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" />
+          <p class="mb-4 text-secondary">csv/ xls/ xlsx</p>
         </div>
-        <button class="btn btn-outline-success my-5 py-3 col-4">
+        <button
+          class="btn btn-outline-success my-5 py-3 col-4"
+          id="analyze-data"
+        >
           Click Here To Start Analyze 🪄
         </button>
       </div>
