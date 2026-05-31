@@ -2,22 +2,26 @@ import { readUploadedFile } from "../modules/fileRead.js";
 
 const getFileData = document.getElementById("analyze-data");
 const readFile = document.getElementById("fileInput");
+let selectedFile = null;
 
-getFileData.addEventListener("click", () => {
-  console.log("Start the function");
-  readFile.addEventListener("change", async (e) => {
-    const file = e.target.files[0];
+readFile.addEventListener("change", (e) => {
+  selectedFile = e.target.files[0] || null;
+});
 
-    try {
-      const data = await readUploadedFile(file);
-      console.log("Extracted Data:", data);
+getFileData.addEventListener("click", async () => {
+  if (!selectedFile) {
+    alert("Please choose a file first before starting analysis.");
+    return;
+  }
 
-      localStorage.setItem("uploaded_sales", JSON.stringify(data));
+  try {
+    const data = await readUploadedFile(selectedFile);
+    console.log("Extracted Data:", data);
 
-      alert("File processed successfully!");
-    } catch (err) {
-      alert(err);
-      console.log("err");
-    }
-  });
+    localStorage.setItem("uploaded_sales", JSON.stringify(data));
+
+    alert("File processed successfully!");
+  } catch (err) {
+    alert(err);
+  }
 });

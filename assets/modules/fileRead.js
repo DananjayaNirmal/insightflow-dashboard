@@ -1,10 +1,12 @@
+// SMART MODE COLUMN MAP
 const COLUMN_MAP = {
   date: ["date", "transaction date", "sale date", "order date"],
   product: ["product", "item", "product name", "item name"],
   quantity: ["quantity", "qty", "qnty", "units sold"],
   price: ["price", "unit price", "amount", "rate"],
-}; //smart mode
+};
 
+// Normalize header names
 function normalizeHeader(header) {
   return header
     .toLowerCase()
@@ -12,18 +14,20 @@ function normalizeHeader(header) {
     .replace(/[^a-z0-9 ]/g, "");
 }
 
+// Find correct column name using smart mode
 function detectColumn(header) {
   const normalized = normalizeHeader(header);
 
   for (const key in COLUMN_MAP) {
     if (COLUMN_MAP[key].includes(normalized)) {
-      return key;
+      return key; // date, product, quantity, price
     }
   }
 
-  return null;
+  return null; // unknown column
 }
 
+// MAIN FUNCTION — READ FILE
 export function readUploadedFile(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
