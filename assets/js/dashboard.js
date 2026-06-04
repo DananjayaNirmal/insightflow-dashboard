@@ -1,9 +1,9 @@
-import { readUploadedFile } from "../modules/fileRead.js";
-import { findInsights } from "../modules/analytics.js";
+import { readUploadedFile } from "../../modules/fileRead.js";
+import { findInsights } from "../../modules/analytics.js";
 import {
   renderMonthlyRevenueChart,
   renderTopProductsChart,
-} from "../modules/charts.js";
+} from "../../modules/charts.js";
 
 const analyzeData = document.getElementById("analyze-data");
 const readFile = document.getElementById("fileInput");
