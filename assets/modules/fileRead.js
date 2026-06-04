@@ -71,12 +71,9 @@ export function readUploadedFile(file) {
       const cleaned = raw.slice(1).map((row) => {
         return {
           date: new Date(row[mappedHeaders.date]),
-          product: String(row[mappedHeaders.product]).trim(),
+          product: String(row[mappedHeaders.product]),
           quantity: Number(row[mappedHeaders.quantity]),
           price: Number(row[mappedHeaders.price]),
-          total:
-            Number(row[mappedHeaders.quantity]) *
-            Number(row[mappedHeaders.price]),
         };
       });
 

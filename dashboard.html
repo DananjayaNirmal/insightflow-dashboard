@@ -17,6 +17,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <title>Document</title>
   </head>
   <body>
@@ -54,32 +56,31 @@
       <section>
         <div class="row m-4">
           <div
-            class="col m-2 d-flex align-items-center justify-content-center shadow-lg rounded bg-body-tertiary rounded"
+            class="col m-2 p-2 d-flex align-items-center justify-content-center shadow-lg rounded bg-body-tertiary rounded"
           >
-            <p>Yearly revenue: 1000usd</p>
-            <p>Monthly Revenue</p>
+            <p id="yearly-revenue">Yearly revenue: 1000usd</p>
           </div>
 
           <div
             class="col m-2 p-2 d-flex align-items-center justify-content-center shadow-lg rounded bg-body-tertiary rounded"
             style="min-height: 100px"
           >
-            <p>Total sales Count</p>
+            <p id="sales-count">Total sales Count</p>
           </div>
           <div
             class="col m-2 p-2 d-flex align-items-center justify-content-center shadow-lg rounded bg-body-tertiary"
           >
-            <p>Average order value</p>
+            <p id="average-order">Average order value</p>
           </div>
           <div
             class="col m-2 p-2 d-flex align-items-center justify-content-center shadow-lg rounded bg-body-tertiary rounded"
           >
-            <p>Total profit</p>
+            <p id="profit">Total profit</p>
           </div>
           <div
             class="col m-2 p-2 d-flex align-items-center justify-content-center shadow-lg rounded bg-body-tertiary rounded"
           >
-            <p>Growth %</p>
+            <p id="growth">Growth %</p>
           </div>
         </div>
 
@@ -88,42 +89,32 @@
             class="col-5 p-2 shadow-lg rounded shadow bg-body-tertiary"
             style="min-height: 300px"
           >
-            <h4>Chart 1</h4>
+            <h5>Sales Chart</h5>
+            <canvas id="revenueChart"></canvas>
+            <canvas id="topProductsChart"></canvas>
           </div>
           <div
             class="col-7 p-2 shadow-lg rounded shadow bg-body-tertiary"
             style="min-height: 300px"
-          >
-            <h3>AI insights</h3>
-          </div>
+            id="more-insights"
+          ></div>
         </div>
 
         <div class="m-5">
           <h4 class="m-5">Top products all the time</h4>
           <div>
-            <table class="table">
+            <table class="table" id="top-products">
               <thead>
                 <tr>
                   <th scope="col">Product name & brand</th>
-                  <th scope="col">Total sales count</th>
+
                   <th scope="col">Total revenue</th>
                 </tr>
               </thead>
               <tbody class="table-group-divider">
                 <tr>
-                  <th scope="row">hp core i3 14inches elitebook g7</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>John</td>
-                  <td>Doe</td>
+                  <th scope="row">--</th>
+                  <td>--</td>
                 </tr>
               </tbody>
             </table>
