@@ -15,7 +15,6 @@ const averageOrder = document.getElementById("average-order");
 const profit = document.getElementById("profit");
 const growth = document.getElementById("growth");
 const moreInsights = document.getElementById("more-insights");
-//const saveInsightsBtn = document.getElementById("save-insights-btn");
 
 const saveInsights = document.getElementById("save-insights");
 const getInsightName = document.getElementById("set-insight-name");
@@ -102,50 +101,4 @@ analyzeData.addEventListener("click", async () => {
   }
   await getInsights();
   displayInsights();
-});
-
-// Handle Save button inside modal
-saveInsights.addEventListener("click", () => {
-  const insights = JSON.parse(localStorage.getItem("sales-insights"));
-
-  if (!insights) {
-    alert("No insights to save. Please analyze a file first.");
-    return;
-  }
-
-  //saveInsightsBtn.addEventListener("click", () => {});
-  const name = getInsightName.value.trim().toLowerCase();
-  if (!name) {
-    alert("Please enter a name");
-    return;
-  }
-
-  if (!insights) {
-    alert("No insights to save. Please analyze a file first.");
-    return;
-  } //this should triger when actual save btn clicked
-
-  const payload = {
-    insights_name: name,
-    insight: JSON.stringify(insights),
-  };
-
-  console.log("__________");
-  console.log(insights);
-  console.log(name);
-
-  /*fetch("backend/controllers/saveInsights.php", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data && data.status === "success") {
-        alert("Insights saved!");
-      } else {
-        console.error("Unexpected response", data);
-        alert("Failed to save insights. See console for details.");
-      }
-    });*/
 });
