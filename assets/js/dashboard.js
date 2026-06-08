@@ -6,6 +6,7 @@ import {
 } from "../../modules/charts.js";
 
 const analyzeData = document.getElementById("analyze-data");
+
 const readFile = document.getElementById("fileInput");
 const yearlyRevenue = document.getElementById("yearly-revenue");
 const monthlyRevenue = document.getElementById("monthly-revenue");
@@ -14,8 +15,15 @@ const averageOrder = document.getElementById("average-order");
 const profit = document.getElementById("profit");
 const growth = document.getElementById("growth");
 const moreInsights = document.getElementById("more-insights");
+//const saveInsightsBtn = document.getElementById("save-insights-btn");
+
+const saveInsights = document.getElementById("save-insights");
+const getInsightName = document.getElementById("set-insight-name");
+const saveInsightsModalEl = document.getElementById("saveInsightsModal");
+const saveInsightsModal = new bootstrap.Modal(saveInsightsModalEl);
 
 let selectedFile = null;
+saveInsightsModal.hide();
 
 const getFileData = async () => {
   try {
@@ -39,19 +47,6 @@ const getInsights = async () => {
     console.error("Error:", error);
   }
 };
-
-readFile.addEventListener("change", (e) => {
-  selectedFile = e.target.files[0] || null;
-});
-
-analyzeData.addEventListener("click", async () => {
-  if (!selectedFile) {
-    alert("Please choose a file first before starting analysis.");
-    return;
-  }
-  await getInsights();
-  displayInsights();
-});
 
 const displayMoreInsights = (moreInsightsArray) => {
   moreInsights.innerHTML = "";
@@ -96,4 +91,61 @@ const displayInsights = () => {
   displayTopProducts(allInsights.topProducts);
 };
 
-//line no 16
+readFile.addEventListener("change", (e) => {
+  selectedFile = e.target.files[0] || null;
+});
+
+analyzeData.addEventListener("click", async () => {
+  if (!selectedFile) {
+    alert("Please choose a file first before starting analysis.");
+    return;
+  }
+  await getInsights();
+  displayInsights();
+});
+
+// Handle Save button inside modal
+saveInsights.addEventListener("click", () => {
+  const insights = JSON.parse(localStorage.getItem("sales-insights"));
+
+  if (!insights) {
+    alert("No insights to save. Please analyze a file first.");
+    return;
+  }
+
+  //saveInsightsBtn.addEventListener("click", () => {});
+  const name = getInsightName.value.trim().toLowerCase();
+  if (!name) {
+    alert("Please enter a name");
+    return;
+  }
+
+  if (!insights) {
+    alert("No insights to save. Please analyze a file first.");
+    return;
+  } //this should triger when actual save btn clicked
+
+  const payload = {
+    insights_name: name,
+    insight: JSON.stringify(insights),
+  };
+
+  console.log("__________");
+  console.log(insights);
+  console.log(name);
+
+  /*fetch("backend/controllers/saveInsights.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data && data.status === "success") {
+        alert("Insights saved!");
+      } else {
+        console.error("Unexpected response", data);
+        alert("Failed to save insights. See console for details.");
+      }
+    });*/
+});
