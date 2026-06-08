@@ -5,6 +5,11 @@ import {
   renderTopProductsChart,
 } from "../../modules/charts.js";
 
+import {
+  revenueChartInstance,
+  topProductsChartInstance,
+} from "../../modules/charts.js";
+
 const analyzeData = document.getElementById("analyze-data");
 
 const readFile = document.getElementById("fileInput");
@@ -20,6 +25,8 @@ const saveInsights = document.getElementById("save-insights");
 const getInsightName = document.getElementById("set-insight-name");
 const saveInsightsModalEl = document.getElementById("saveInsightsModal");
 const saveInsightsModal = new bootstrap.Modal(saveInsightsModalEl);
+
+const downloadPdfBtn = document.getElementById("download-pdf");
 
 let selectedFile = null;
 saveInsightsModal.hide();
@@ -101,4 +108,46 @@ analyzeData.addEventListener("click", async () => {
   }
   await getInsights();
   displayInsights();
+});
+
+downloadPdfBtn.addEventListener("click", () => {
+  const insights = JSON.parse(localStorage.getItem("sales-insights"));
+
+  if (!insights) {
+    alert("No insights found. Analyze a file first.");
+    return;
+  }
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  // Title
+  doc.setFontSize(18);
+  doc.text("InsightFlow Report", 10, 15);
+
+  // Basic info
+  doc.setFontSize(12);
+  doc.text(`Revenue: ${insights.revenue}`, 10, 30);
+  doc.text(`Profit: ${insights.profit}`, 10, 40);
+  doc.text(`Sales Count: ${insights.salesCount}`, 10, 50);
+  doc.text(`Growth: ${insights.growth}%`, 10, 60);
+  doc.text(`AOV: ${Math.round(insights.AOV)}`, 10, 70);
+
+  // Add first chart
+  if (revenueChartInstance) {
+    const img1 = revenueChartInstance.toBase64Image();
+    doc.addImage(img1, "PNG", 10, 90, 180, 80);
+  }
+
+  // Add second chart on new page
+  doc.addPage();
+
+  if (topProductsChartInstance) {
+    const img2 = topProductsChartInstance.toBase64Image();
+    doc.addImage(img2, "PNG", 10, 20, 180, 80);
+  }
+
+  // Save PDF
+  const timestamp = new Date().toISOString().split("T")[0];
+  doc.save(`insights-${timestamp}.pdf`);
 });
