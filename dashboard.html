@@ -61,6 +61,7 @@
         >
           Click Here To Start Analyze 🪄
         </button>
+        
       </div>
       <section>
         <div class="row m-4">
@@ -167,30 +168,21 @@
         >
           Download as a PDF
         </button>
+      </section>
 
-        <div class="modal fade" id="saveInsightsModal">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5 text-success">Your analytics report has been downloaded</h1>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                ></button>
-              </div>
-
-              <div class="modal-body">
-                <p>
-                  Need it again later? No problem. 
-                  This report will stay available for download
-                  until a new document is uploaded and analyzed.
-                </p>
-              </div>
+       <!--toast message-->
+        <div class="toast-container position-fixed top-0 p-3">
+        <div id="app-toast" class="toast align-items-center text-bg-primary border-0" role="alert">
+          <div class="d-flex">
+            <div class="toast-body" id="toast-body">
+             
             </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
           </div>
         </div>
-      </section>
+      </div>
+      <!--toast message-->
+
     </main>
     <script type="module" src="./assets/js/dashboard.js"></script>
   </body>

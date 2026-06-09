@@ -21,23 +21,17 @@ const profit = document.getElementById("profit");
 const growth = document.getElementById("growth");
 const moreInsights = document.getElementById("more-insights");
 
-const saveInsights = document.getElementById("save-insights");
-const getInsightName = document.getElementById("set-insight-name");
-const saveInsightsModalEl = document.getElementById("saveInsightsModal");
-const saveInsightsModal = new bootstrap.Modal(saveInsightsModalEl);
-
 const downloadPdfBtn = document.getElementById("download-pdf");
 
 let selectedFile = null;
-saveInsightsModal.hide();
 
 const getFileData = async () => {
   try {
     const data = await readUploadedFile(selectedFile);
-    alert("File processed successfully!");
+    showToast("File processed successfully!");
     return data;
   } catch (err) {
-    alert(err);
+    console.error(err);
   }
 };
 
@@ -114,9 +108,11 @@ readFile.addEventListener("change", (e) => {
 
 analyzeData.addEventListener("click", async () => {
   if (!selectedFile) {
-    alert("Please choose a file first before starting analysis.");
+    showToast("Please choose a file first before starting analysis.");
+
     return;
   }
+
   await getInsights();
   displayInsights();
 });
@@ -125,7 +121,8 @@ downloadPdfBtn.addEventListener("click", () => {
   const insights = JSON.parse(localStorage.getItem("sales-insights"));
 
   if (!insights) {
-    alert("No insights found. Analyze a file first.");
+    showToast("No insights found. Analyze a file first.");
+
     return;
   }
 
@@ -157,3 +154,12 @@ downloadPdfBtn.addEventListener("click", () => {
   const timestamp = new Date().toISOString().split("T")[0];
   doc.save(`insights-${timestamp}.pdf`);
 });
+
+function showToast(message) {
+  const toastBody = document.getElementById("toast-body");
+  toastBody.textContent = message;
+
+  const toastEl = document.getElementById("app-toast");
+  const toast = new bootstrap.Toast(toastEl);
+  toast.show();
+}
