@@ -40,7 +40,8 @@ const findTopProducts = (cleanedData) => {
 
   return Object.entries(productMap)
     .map(([product, revenue]) => ({ product, revenue }))
-    .sort((a, b) => b.revenue - a.revenue);
+    .sort((a, b) => b.revenue - a.revenue)
+    .slice(0, 10);
 };
 
 const findTotalSalesCount = (cleanedData) => cleanedData.length;
@@ -88,12 +89,12 @@ const generateMoreInsights = (insights) => {
     );
   }
 
-  manualInsights.push(`Total revenue is Rs. ${insights.revenue}.`);
+  manualInsights.push(`Total revenue is ${insights.revenue} $.`);
 
   const top = insights.topProducts[0];
   if (top) {
     manualInsights.push(
-      `Top product is ${top.product} with Rs. ${top.revenue} revenue.`,
+      `Top product is ${top.product} with ${top.revenue} $ revenue.`,
     );
   }
 

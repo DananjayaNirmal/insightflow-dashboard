@@ -30,9 +30,10 @@
           <img src="./assets/images/logo.png" alt="logo" style="width: 200px" />
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#"
+              <!--a class="nav-link active" aria-current="page" href="#"
                 >🔐 History</a
               >
+            </li-->
             </li>
           </ul>
         </div>
@@ -44,10 +45,16 @@
 
       <div class="m-5">
         <h5 class="mb-5">Choose or Drag and drop your sales report here📈</h5>
-        <div class="border border-2 border-dashed rounded p-5">
-          <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" />
+        <div class="border border-2 border-dashed rounded p-5 w-75 mx-auto">
+          <input
+            type="file"
+            class="form-control"
+            id="fileInput"
+            accept=".xlsx,.xls,.csv"
+          />
           <p class="mb-4 text-secondary">csv/ xls/ xlsx</p>
         </div>
+
         <button
           class="btn btn-outline-success my-5 py-3 col-4"
           id="analyze-data"
@@ -60,60 +67,89 @@
           <div
             class="col m-2 p-2 d-flex align-items-center justify-content-center shadow-lg rounded bg-body-tertiary rounded"
           >
-            <p id="yearly-revenue">Yearly revenue: 1000usd</p>
+            <div class="row">
+              <p id="yearly-revenue">--</p>
+              <hr class="border opacity-100 border-primary w-75 mx-auto" />
+              <p>Yearly revenue</p>
+            </div>
           </div>
 
           <div
             class="col m-2 p-2 d-flex align-items-center justify-content-center shadow-lg rounded bg-body-tertiary rounded"
             style="min-height: 100px"
           >
-            <p id="sales-count">Total sales Count</p>
+            <div class="row">
+              <p id="sales-count">--</p>
+              <hr class="border opacity-100 border-primary w-75 mx-auto" />
+              <p>Total sales Count</p>
+            </div>
           </div>
           <div
             class="col m-2 p-2 d-flex align-items-center justify-content-center shadow-lg rounded bg-body-tertiary"
           >
-            <p id="average-order">Average order value</p>
+            <div class="row">
+              <p id="average-order">--</p>
+              <hr
+                class="border opacity-100 border-primary w-75 mx-auto w-75 mx-auto"
+              />
+              <p>Average order value</p>
+            </div>
           </div>
           <div
             class="col m-2 p-2 d-flex align-items-center justify-content-center shadow-lg rounded bg-body-tertiary rounded"
           >
-            <p id="profit">Total profit</p>
+            <div class="row">
+              <p id="profit">--</p>
+              <hr class="border opacity-100 border-primary w-75 mx-auto" />
+              <p>Total profit</p>
+            </div>
           </div>
           <div
             class="col m-2 p-2 d-flex align-items-center justify-content-center shadow-lg rounded bg-body-tertiary rounded"
           >
-            <p id="growth">Growth %</p>
+            <div class="row">
+              <p id="growth">--</p>
+              <hr class="border opacity-100 border-primary w-75 mx-auto" />
+              <p>Growth</p>
+            </div>
           </div>
         </div>
 
         <div class="row m-4">
           <div
-            class="col-5 p-2 shadow-lg rounded shadow bg-body-tertiary"
+            class="col-7 p-2 shadow-lg rounded shadow bg-body-tertiary"
             style="min-height: 300px"
           >
             <h5>Sales Chart</h5>
-            <canvas id="revenueChart"></canvas>
             <canvas id="topProductsChart"></canvas>
           </div>
           <div
-            class="col-7 p-2 shadow-lg rounded shadow bg-body-tertiary"
+            class="col-5 p-2 shadow-lg rounded shadow bg-body-tertiary d-flex flex-column gap-2 pt-3"
             style="min-height: 300px"
-            id="more-insights"
-          ></div>
+          >
+            <canvas id="revenueChart"></canvas>
+          </div>
         </div>
-
+        <!--new section-->
+        <div class="my-5">
+          <h5 class="m-3">🎯</h5>
+          <p class="my-auto" id="more-insights"></p>
+        </div>
+        <!--new section-->
         <div class="m-5">
-          <h4 class="m-5">Top products all the time</h4>
-          <div>
+          <h5 class="m-5">Top products</h5>
+          <div class="w-50 mx-auto">
             <table class="table" id="top-products">
               <thead>
                 <tr>
-                  <th scope="col">Product name & brand</th>
+                  <td scope="col">Product name & brand</th>
 
-                  <th scope="col">Total revenue</th>
+                  <td scope="col">Total revenue</th>
                 </tr>
               </thead>
-              <tbody class="table-group-divider">
+              <tbody
+                class="table-group-divider border-secondary justify-content-start"
+              >
                 <tr>
                   <th scope="row">--</th>
                   <td>--</td>
@@ -135,8 +171,8 @@
         <div class="modal fade" id="saveInsightsModal">
           <div class="modal-dialog">
             <div class="modal-content">
-              <div class="modal-body">
-                <h1 class="modal-title fs-5">Download success!</h1>
+              <div class="modal-header">
+                <h1 class="modal-title fs-5 text-success">Your analytics report has been downloaded</h1>
                 <button
                   type="button"
                   class="btn-close"
@@ -146,10 +182,9 @@
 
               <div class="modal-body">
                 <p>
-                  , Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Maxime molestias laboriosam perferendis dolorum et recusandae
-                  ab quia dolores perspiciatis nesciunt, magnam illum aperiam
-                  dolore
+                  Need it again later? No problem. 
+                  This report will stay available for download
+                  until a new document is uploaded and analyzed.
                 </p>
               </div>
             </div>
