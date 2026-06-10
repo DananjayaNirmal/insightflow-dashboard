@@ -1,4 +1,5 @@
 # 📊 InsightFlow Dashboard
+
 A dashboard for analyzing sales data, generating insights, visualizing charts, and exporting reports as PDF.
 
 ![status: mini version](https://img.shields.io/badge/status-mini--version-blue)
@@ -38,24 +39,7 @@ A dashboard for analyzing sales data, generating insights, visualizing charts, a
 
 ## 📂 Project Structure
 
-InsightFlow-dashboard/
-│
-├── assets/
-│   ├── images/
-│   │   └── logo.png
-│   └── js/
-│       └── dashboard.js
-│
-├── modules/
-│   ├── analytics.js
-│   ├── charts.js
-│   └── fileRead.js
-│
-├── .gitignore
-├── dashboard.html
-├── instructions.html
-├── LICENSE
-└── README.md
+<img width="349" height="527" alt="image" src="https://github.com/user-attachments/assets/9f7a8f5e-010c-4344-8546-3acfccff9d74" />
 
 ## 📥 How to Use
 
