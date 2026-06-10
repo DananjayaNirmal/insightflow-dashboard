@@ -1,4 +1,4 @@
-const cleanData = (data) => {
+const cleanData = async (data) => {
   return data.map((row) => {
     const date = new Date(row.date);
     const iso = date.toISOString().split("T")[0];
@@ -9,6 +9,7 @@ const cleanData = (data) => {
       product: (row.product || "").trim().toLowerCase(),
       quantity: Number(String(row.quantity).replace(/[^\d.-]/g, "")) || 0,
       price: Number(String(row.price).replace(/[^\d.-]/g, "")) || 0,
+      cost: Number(String(row.cost).replace(/[^\d.-]/g, "")) || 0,
     };
   });
 };
@@ -39,7 +40,10 @@ const findTopProducts = (cleanedData) => {
   });
 
   return Object.entries(productMap)
-    .map(([product, revenue]) => ({ product, revenue }))
+    .map(([product, revenue]) => ({
+      product,
+      revenue: Math.round(revenue * 100) / 100,
+    }))
     .sort((a, b) => b.revenue - a.revenue)
     .slice(0, 10);
 };
@@ -47,9 +51,13 @@ const findTopProducts = (cleanedData) => {
 const findTotalSalesCount = (cleanedData) => cleanedData.length;
 
 const findTotalProfit = (cleanedData) => {
-  return cleanedData.reduce((sum, row) => {
-    return sum + row.quantity * row.price;
+  const totalCost = cleanedData.reduce((sum, row) => {
+    return sum + row.quantity * row.cost;
   }, 0);
+
+  const revenue = findRevenue(cleanedData);
+
+  return revenue - totalCost;
 };
 
 const findGrowth = (cleanedData) => {
@@ -67,11 +75,8 @@ const findGrowth = (cleanedData) => {
 const findAOV = (cleanedData) => {
   if (!cleanedData.length) return 0;
 
-  const totalRevenue = cleanedData.reduce((sum, row) => {
-    return sum + row.quantity * row.price;
-  }, 0);
-
-  const totalOrders = cleanedData.length;
+  const totalRevenue = findRevenue(cleanedData);
+  const totalOrders = findTotalSalesCount(cleanedData);
 
   return totalRevenue / totalOrders;
 };

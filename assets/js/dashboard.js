@@ -3,9 +3,6 @@ import { findInsights } from "../../modules/analytics.js";
 import {
   renderMonthlyRevenueChart,
   renderTopProductsChart,
-} from "../../modules/charts.js";
-
-import {
   revenueChartInstance,
   topProductsChartInstance,
 } from "../../modules/charts.js";
@@ -41,8 +38,6 @@ const getInsights = async () => {
     const insights = await findInsights(data);
 
     localStorage.setItem("sales-insights", JSON.stringify(insights));
-
-    //console.log("insightes: ", insights);
   } catch (error) {
     console.error("Error:", error);
   }

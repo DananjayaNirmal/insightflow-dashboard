@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+  </head>
+  <body>
+    <div class="container-md w-75 bg-light text-center my-5 mx-auto p-5">
+      <a href="./dashboard.html" class="link-underline link-underline-opacity-0"
+        ><i class="bi bi-arrow-left">Back</i></a
+      >
+      <br /><br />
+      <h4 class="text-success">File Upload Requirements ✨</h4>
+
+      <div class="text-start mt-5">
+        <p>
+          Please upload an Excel (.xlsx, .xls) or CSV file containing sales
+          data.
+        </p>
+
+        <p class="text-primary mt-3">Required Columns</p>
+
+        <ul>
+          <li>Date</li>
+          <li>Product</li>
+          <li>Quantity</li>
+          <li>Price</li>
+          <li>Cost</li>
+        </ul>
+
+        <p class="text-primary mt-3">Accepted Alternative Column Names</p>
+
+        <ul>
+          <li>Product: Product Name, Item, Item Name</li>
+          <li>Quantity: Qty, Qnty, Units Sold</li>
+          <li>Price: Unit Price, Amount, Rate</li>
+          <li>Date: Transaction Date, Sale Date, Order Date</li>
+          <li>Cost: Unit Cost</li>
+        </ul>
+
+        <p class="text-primary mt-3">Example Format</p>
+
+        <table class="table mt-3 text-start">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Product</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Price</th>
+              <th scope="col">Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2026-01-01</td>
+              <td>Apple MacBook Air M3 13-inch Laptop</td>
+              <td>1</td>
+              <td>700000</td>
+              <td>600000</td>
+            </tr>
+            <tr>
+              <td>2026-12-01</td>
+              <td>HP Pavilion Gaming Desktop PC</td>
+              <td>1</td>
+              <td>300000</td>
+              <td>100000</td>
+            </tr>
+            <tr>
+              <td>2026-2-01</td>
+              <td>Dell Inspiron 15 Business Laptop</td>
+              <td>10</td>
+              <td>200000</td>
+              <td>150000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

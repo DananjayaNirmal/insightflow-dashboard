@@ -3,6 +3,7 @@ const COLUMN_MAP = {
   product: ["product", "item", "product name", "item name"],
   quantity: ["quantity", "qty", "qnty", "units sold"],
   price: ["price", "unit price", "amount", "rate"],
+  cost: ["cost", "unit cost"],
 };
 
 function normalizeHeader(header) {
@@ -21,7 +22,7 @@ function detectColumn(header) {
     }
   }
 
-  return null; // unknown column
+  return null;
 }
 
 export function readUploadedFile(file) {
@@ -32,11 +33,9 @@ export function readUploadedFile(file) {
       const data = new Uint8Array(event.target.result);
       const workbook = XLSX.read(data, { type: "array" });
 
-      // Use first sheet
       const sheetName = workbook.SheetNames[0];
       const sheet = workbook.Sheets[sheetName];
 
-      // Convert to JSON
       const raw = XLSX.utils.sheet_to_json(sheet, { header: 1 });
 
       if (raw.length < 2) {
@@ -44,18 +43,15 @@ export function readUploadedFile(file) {
         return;
       }
 
-      // Extract headers
       const headers = raw[0];
 
-      // Map headers to internal keys
       const mappedHeaders = {};
       headers.forEach((h, i) => {
         const detected = detectColumn(h);
         if (detected) mappedHeaders[detected] = i;
       });
 
-      // Validate required columns
-      const required = ["date", "product", "quantity", "price"];
+      const required = ["date", "product", "quantity", "price", "cost"];
       for (const col of required) {
         if (!(col in mappedHeaders)) {
           reject(`Missing required column: ${col}`);
@@ -63,17 +59,13 @@ export function readUploadedFile(file) {
         }
       }
 
-      /*console.log("RAW HEADERS:", headers);
-      console.log("NORMALIZED:", headers.map(normalizeHeader));
-      console.log("MAPPED:", mappedHeaders);*/
-
-      // Build cleaned dataset
       const cleaned = raw.slice(1).map((row) => {
         return {
           date: new Date(row[mappedHeaders.date]),
           product: String(row[mappedHeaders.product]),
           quantity: Number(row[mappedHeaders.quantity]),
           price: Number(row[mappedHeaders.price]),
+          cost: Number(row[mappedHeaders.cost]),
         };
       });
 
